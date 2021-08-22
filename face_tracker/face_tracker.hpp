@@ -106,11 +106,6 @@ inline void FaceTrackerPF::control_callback(std::vector<double>& states) {
     for (unsigned int i = 0; i < states.size(); ++i) {
         std_devs.emplace_back(Filter::Util::generate_random_num_gaussian(0.0, sigma_control_, 1)[0]);
     }
-
-    states.at(X);
-    states.at(HX);
-    states.at(VX);
-    std_devs.at(0);
     states.at(X) += (states.at(VX) * delta_t_ + std_devs.at(0) * states.at(HX));
     states.at(Y) += (states.at(VY) * delta_t_ + std_devs.at(1) * states.at(HY));
     states.at(VX) += (std_devs.at(2) * velocity_disturb_);
